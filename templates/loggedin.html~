@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+    {% block head %}    <!-- Bootstrap core CSS -->
+    <link href="http://notendur.hi.is/~job13/css/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://notendur.hi.is/~job13/css/signin.css" rel="stylesheet">{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+    <h2>Málsýni - greining og úrvinnsla</h2>
+
+    <p>Afritaðu málsýnið á staðlaða forminu í gluggann hér fyrir neðan:</p>
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}        
+<!--<label for="malsyni">Afritaðu málsýnið á staðlaða forminu í gluggann hér fyrir neðan:</label><br>
+        <textarea name="malsyni" rows="15" cols="70" id="malsyni"></textarea><br>
+        <label for="aldur">Aldur: </label>
+        <input type="text" name="aldur" value="" id="aldur"><br>
+        Kyn: <select name="kyn">
+          <option value="Drengur">Drengur</option>
+          <option value="Stúlka">Stúlka</option>
+        </select>
+        <input type="hidden" id="prufa" name="prufa" value="Virkar"> -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Skoða málsýni</button>
+    </form>
+    <br><br><br>
+    <p><a href="/accounts/logout/">Útskrá</a>  <a href="/malsyni/stjornbord/">Stjórnborð</a></p>
+    </div> <!-- /container -->
+{% endblock %}

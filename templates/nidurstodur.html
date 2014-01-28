@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style type="text/css">
+#div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+#div2
+{
+padding-left:140px;
+}
+</style>
+<script>
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+ev.target.appendChild(document.getElementById(data));
+}
+</script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <h1>Niðurstöður</h1>
+
+{% if gisk %}
+<h2>IceNLP þurfti að giska á eftirfarandi orð:</h2>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Nafnorð
+
+{% for nafn in nafnord%}
+<div id="{{nafn}}"  draggable="true" ondragstart="drag(event)"><li> {{nafn}}</li></div>
+{% endfor %}
+
+</div>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Lýsingarorð
+{% for lysing in lysingar%}
+<div id="{{lysing}}"  draggable="true" ondragstart="drag(event)"><li> {{lysing}}</li></div>
+{% endfor %}
+</div>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Sögn <br>
+{% for sogn in sagnir%}
+<div id="{{sogn}}"  draggable="true" ondragstart="drag(event)"><li> {{sogn}}</li></div>
+{% endfor %}
+</div>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Atviksorð og forsetningar
+{% for atvik in atviks%}
+<div id="{{atvik}}"  draggable="true" ondragstart="drag(event)"><li> {{atvik}}</li></div>
+</div>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Samtenging
+{% for samteng in samtenging%}
+<div id="{{samteng}}"  draggable="true" ondragstart="drag(event)"><li> {{samteng}}</li>
+</div>
+
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Fornafn
+{% for forn in fornafn%}
+<div id="{{forn}}"  draggable="true" ondragstart="drag(event)"><li> {{forn}}</li>
+</div>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Greinir
+{% for grein in greinir%}
+<div id="{{grein}}"  draggable="true" ondragstart="drag(event)"><li> {{grein}}</li>
+</div>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" class="ex"> Tala
+{% for tal in tala%}
+<div id="{{tal}}"  draggable="true" ondragstart="drag(event)"><li> {{tal}}</li>
+</div>
+<button class="btn btn-lg btn-primary btn-block" type="submit">Vista</button> <br>
+{% endif %}
+
+<b>Kyn: </b> {{kyn}} <br>
+<b>Aldur: </b> {{aldur}} <br>
+
+<header> <h2>Meðallengd segða</h2></header>
+<b>Meðallengd segða: </b> {{mlsbarn}} <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{mlsgraf}}/graf/">
+
+<header> <h2>Heildarfjöldi orða</h2></header>
+<b>Heildarfjöldi orða: </b> {{bord}} <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{bordgraf}}/graf/">
+
+<header> <h2>Fjölbreytileiki orða</h2></header>
+<b>Fjöldi mismunandi orða: </b>{{misbord}} <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{misbordgraf}}/graf/">
+
+<header> <h2>Fjöldi villna</h2></header>
+<b>Fjöldi villna: </b>{{villur}} <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{villugraf}}/graf/">
+
+<header> <h2>Skipting orðflokka</h2></header> <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{ordagraf}}/graf/">
+
+<header> <h2>Tíðarbeyging sagna</h2></header> <br>
+<br>
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/{{tidargraf}}/graf/">
+
+<header> <h2>Persónuhættir sagna</h2></header> <br>
+<table border="1">
+<tr>
+  <td>Framsöguháttur</td>
+  <td>{{sfn}}</td>
+</tr>
+<tr>
+  <td>Nafnháttur</td>
+  <td>{{snn}}</td>
+</tr>
+<tr>
+  <td>Lýsingarháttur þátíðar</td>
+  <td>{{sthn}}</td>
+</tr>
+<tr>
+  <td>Boðháttur</td>
+  <td>{{sbn}}</td>
+</tr>
+<tr>
+  <td>Viðtengingarháttur</td>
+  <td>{{svn}}</td>
+</tr>
+<tr>
+  <td>Sagnbót</td>
+  <td>{{ssn}}</td>
+</tr>
+<tr>
+  <td>Lýsingarháttur nútíðar</td>
+  <td>{{sgn}}</td>
+</tr>
+</table>
+
+<header> <h2>Persónubeyging sagna</h2></header> <br>
+<table border="1">
+<tr>
+  <td>1. persóna</td>
+  <td>{{fyrstapn}}</td>
+</tr>
+<tr>
+  <td>2. persóna</td>
+  <td>{{onnurpn}}</td>
+</tr>
+<tr>
+  <td>3. persóna</td>
+  <td>{{thridjapn}}</td>
+</tr>
+</table>
+
+<header> <h2>Tíðarbeyging sagna</h2></header> <br>
+<table border="1">
+<tr>
+  <td>Nútíð</td>
+  <td>{{nutid}}</td>
+</tr>
+<tr>
+  <td>Þátíð</td>
+  <td>{{thatid}}</td>
+</tr>
+</table>
+
+    <p><a href="/accounts/logout/">Útskrá</a></p>
+</div>
+
+
+
+{% endblock %}

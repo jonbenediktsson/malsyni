@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+    {% block head %}    <!-- Bootstrap core CSS -->
+    <link href="http://notendur.hi.is/~job13/css/dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://notendur.hi.is/~job13/css/signin.css" rel="stylesheet">{% endblock %}
+{% block content %}
+
+    {% if form.errors %}
+        <p class="error">Rangt notendanafn eða lykilorð.</p>
+    {% endif %}
+
+    <div class="container">
+
+      <form class="form-signin" role="form" action="/accounts/auth/" method="post">{% csrf_token %}
+        <h2 class="form-signin-heading">Skráðu þig inn</h2>
+        <input type="text" class="form-control" placeholder="Notendanafn" id="username" name="username" required autofocus>
+        <input type="password" class="form-control" placeholder="Lykilorð" id="password"  name="password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Tengjast</button>
+      </form>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+{% endblock %}

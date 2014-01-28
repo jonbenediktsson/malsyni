@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+    {% block head %}   {% endblock %}
+{% block content %}
+
+<img src="http://shrouded-lake-6825.herokuapp.com/charts/0/0/{{grafid}}/">
+
+{% endblock %}
