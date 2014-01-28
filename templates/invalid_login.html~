@@ -1,8 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-    <h2>Notendanafn ekki til! </h2>
-    <p><a href="/accounts/login/">Reyna aftur</a></p>
-
-{% endblock %}
